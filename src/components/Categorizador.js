@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Flipper, Flipped } from "react-flip-toolkit";
-import _ from "lodash";
-import Card from "./Item.js";
+import Card from "./Card.js";
 const Categorizador = (props) => {
   const [data] = useState(props.data);
   const [categorias, setCategorias] = useState([]);
@@ -23,11 +22,15 @@ const Categorizador = (props) => {
   }, [data]);
 
   React.useEffect(() => {
-    setItems(
-      data.filter((rawItems) =>
-        rawItems.categoria.some((c) => c.nome === categoriaSelecionada)
-      )
-    );
+    if (categoriaSelecionada === "Todas") {
+      setItems(data);
+    } else {
+      setItems(
+        data.filter((rawItems) =>
+          rawItems.categoria.some((c) => c.nome === categoriaSelecionada)
+        )
+      );
+    }
   }, [data, categoriaSelecionada]);
 
   // const shuffle = () => setData((data) => _.shuffle(data));
@@ -37,8 +40,11 @@ const Categorizador = (props) => {
       <header>
         <nav className="menu-categorizador">
           <ul>
+            <li onClick={() => showOnly("Todas")} className={categoriaSelecionada === "Todas" ? "active" : ""}>
+              Todas
+            </li>
             {categorias.map((c) => (
-              <li key={c} onClick={() => showOnly(c)}>
+              <li key={c} onClick={() => showOnly(c)} className={categoriaSelecionada === c ? "active" : ""}>
                 {c}
               </li>
             ))}
@@ -46,7 +52,7 @@ const Categorizador = (props) => {
         </nav>
       </header>
       <section className="grid">
-        {items.map((d, i) => (
+        {items.map((d) => (
           <Flipped key={d.id} flipId={d.id}>
             <Card card={d} />
           </Flipped>
