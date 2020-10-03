@@ -1,5 +1,7 @@
 # Categorizador de imagens
 
+![](public/gif/demonstracao.gif)
+
 Esse é projeto para explorar a biblioteca [react-flip-toolkit](https://github.com/aholachek/react-flip-toolkit).
 
 Supondo que em uma aplicação será passado um estrutura de dados da seguinte forma para a nossa aplicação:
