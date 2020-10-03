@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Flipper, Flipped } from "react-flip-toolkit";
 import Card from "./Card.js";
+
 const Categorizador = (props) => {
   const [data] = useState(props.data);
   const [categorias, setCategorias] = useState([]);
